@@ -8,16 +8,17 @@ import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
 import { JwtStrategy } from "./auth/jwt.strategy";
 import { BookCommentsModule } from "./comments/book.comments.module";
+import { AppGateway } from "./gateway/app.gateway";
 
 @Module({
   imports: [
     BooksModule,
-    MongooseModule.forRoot(process.env.MONGO_URL),
     AuthModule,
     UserModule,
     BookCommentsModule,
+    MongooseModule.forRoot(process.env.MONGO_URL),
   ],
   controllers: [AppController],
-  providers: [AppService, JwtStrategy],
+  providers: [AppService, JwtStrategy, AppGateway],
 })
 export class AppModule {}
