@@ -1,6 +1,6 @@
 import { HttpException, Injectable, NotFoundException } from "@nestjs/common";
 import { InjectModel } from "@nestjs/mongoose";
-import { Model } from "mongoose";
+import { Model, ModifyResult } from "mongoose";
 import { Comment, CommentDocument } from "src/schemas/comment.schema";
 import { CreateCommentDto } from "./dto/create.comment.dto";
 
@@ -52,7 +52,7 @@ export class BookCommentsService {
     }
   }
 
-  async delete(id: string): Promise<CommentDocument> {
+  async delete(id: string): Promise<ModifyResult<any>> {
     try {
       const deletedComment = await this.commentModel.findOneAndDelete({
         id: id,

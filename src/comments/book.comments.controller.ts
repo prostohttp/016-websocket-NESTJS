@@ -34,7 +34,7 @@ export class BookCommentsController {
   }
 
   @Delete(":id")
-  async delete(@Param("id") id: string): Promise<CommentDocument> {
+  async delete(@Param("id") id: string) {
     return await this.bookCommentsService.delete(id);
   }
 

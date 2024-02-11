@@ -6,17 +6,21 @@ import {
 import { BookCommentsService } from "src/comments/book.comments.service";
 import { CreateCommentDto } from "src/comments/dto/create.comment.dto";
 
-@WebSocketGateway({ cors: true })
+@WebSocketGateway({
+  cors: {
+    origin: "*",
+  },
+})
 export class AppGateway {
   private readonly bookCommentsService: BookCommentsService;
 
   @SubscribeMessage("all-comments")
-  getAllComments(@MessageBody("bookId") bookId: string) {
-    return this.bookCommentsService.findAllBookComments(bookId);
+  async getAllComments(@MessageBody("bookId") bookId: string) {
+    return await this.bookCommentsService.findAllBookComments(bookId);
   }
 
   @SubscribeMessage("add-comment")
-  addComment(@MessageBody() comment: CreateCommentDto) {
-    return this.bookCommentsService.create(comment);
+  async addComment(@MessageBody() comment: CreateCommentDto) {
+    return await this.bookCommentsService.create(comment);
   }
 }
