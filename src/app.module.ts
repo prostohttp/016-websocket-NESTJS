@@ -24,7 +24,7 @@ mongoose.set("toJSON", {
     ConfigModule.forRoot({
       isGlobal: true,
     }),
-    MongooseModule.forRoot(process.env.MONGO_URL),
+    MongooseModule.forRoot(process.env.MONGO_URL_LOCAL),
   ],
   controllers: [AppController],
   providers: [AppService, JwtStrategy, AppGateway],
